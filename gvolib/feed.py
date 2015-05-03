@@ -1,5 +1,7 @@
 import feedparser
 
+from gvolib.post import Post 
+
 class Feed:
 
     def __init__(self, url=''):
@@ -9,6 +11,9 @@ class Feed:
     def __len__(self):
         'Returns number of loaded posts'
         return len(self.posts)
+
+    def __getitem__(self, idx):
+        return self.posts[idx]
 
     def load(self, page=0, max_pages=10, oldest_date='2010-11'):
         ''' Load posts in self.posts
@@ -20,26 +25,13 @@ class Feed:
         '''
         if page >= max_pages:
             return
-
         feedurl = '%s/?posts_per_page=15&paged=%d' % (self.url, page)               
         fp = feedparser.parse(feedurl)
         for item in fp.entries:
-            #print item.keys()
-            #print item
-            tags = ''
-            for tag in item.tags:
-                tags = tags + tag['term'].strip() + '+'
-            post = {'title': item.title.strip(),
-                    'tags': tags,
-                    'date': '%d-%02d' % (item.published_parsed[0], item.published_parsed[1]),
-                    'authors': item.author,
-                    'link': item.link
-                    }
-            print post
-            if post['date'] == oldest_date:
+            p = Post(item)
+            if p.date == oldest_date:
                 return
-            self.posts.append(post)
-        print page, len(self.posts) 
+            self.posts.append(p) 
         self.load(page+1,max_pages=max_pages, oldest_date=oldest_date)
     
     def get_posts(self):
