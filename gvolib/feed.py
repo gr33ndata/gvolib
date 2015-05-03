@@ -15,6 +15,10 @@ class Feed:
     def __getitem__(self, idx):
         return self.posts[idx]
 
+    def __iter__(self):
+        for p in self.posts:
+            yield p
+
     def load(self, page=0, max_pages=10, oldest_date='2010-11'):
         ''' Load posts in self.posts
             page: Initial page to start with
