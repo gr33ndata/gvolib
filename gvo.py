@@ -7,6 +7,7 @@ from gvolib.feed import Feed
 from gvolib.post import Post
 from gvolib.authors import Authors
 from gvolib.tags import Tags
+from gvolib.progress import Progress 
 
 def parse_cli():
 
@@ -26,26 +27,44 @@ def parse_cli():
         help='Specify the number of pages to retrieve'
     )
 
+    parser.add_argument(
+        '-v', '--verbose', 
+        action='store_true', 
+        help='Print debug messages'
+    )
+
     return parser.parse_args()
 
-def dump_distribution(dist, filename=''): 
+def dump_distribution(dist, filename='', index_label=''): 
     for key in dist:
         dist[key] = pd.Series(dist[key])
     dist_df = pd.DataFrame(dist).fillna(0)
-    dist_df.to_csv(filename)
+    dist_df.to_csv(
+        filename, 
+        index_label=index_label, 
+        encoding='utf-8'
+    )
+
+def print_debug(msg, silent=False):
+    if not silent: print msg
 
 def main(args):
+
+    max_pages = int(args.pages)
+    silent = not args.verbose
+
     f = Feed(args.url)
-    f.load(max_pages=int(args.pages))
-    print 'Loaded posts: ', len(f)
+    prgrs = Progress(n=max_pages, percent=10, silent=silent)
+    f.load(max_pages=max_pages,prgrs=prgrs)
+    print_debug('Loaded posts: {0}'.format(len(f)), silent=silent)
 
     #print Authors(f).distribution()
     auth_dist = Authors(f).time_distribution()
-    dump_distribution(auth_dist, filename='auth_dist.csv')
+    dump_distribution(auth_dist, filename='auth_dist.csv', index_label='author')
     
     #print Tags(f).distribution()
     tags_dist = Tags(f).time_distribution()
-    dump_distribution(tags_dist, filename='tags_dist.csv')
+    dump_distribution(tags_dist, filename='tags_dist.csv', index_label='tag')
 
 
 if __name__ == '__main__':

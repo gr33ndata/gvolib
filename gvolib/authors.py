@@ -1,3 +1,5 @@
+# Author: Tarek Amr <@gr33ndata> 
+
 from gvolib.dist import Dist 
 
 class Authors(Dist):

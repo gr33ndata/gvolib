@@ -1,7 +1,10 @@
+# Author: Tarek Amr <@gr33ndata> 
+
 import feedparser
 
 from gvolib import feed_links
-from gvolib.post import Post 
+from gvolib.post import Post
+from gvolib.progress import Progress 
 
 class Feed:
 
@@ -12,6 +15,7 @@ class Feed:
         '''
         self.posts = []
         self.url = feed_links.get(url, url)
+        self.prgrs = Progress(n=len(self), percent=10)
 
     def __len__(self):
         'Returns number of loaded posts'
@@ -24,7 +28,7 @@ class Feed:
         for p in self.posts:
             yield p
 
-    def load(self, page=0, max_pages=10, oldest_date='2010-11'):
+    def load(self, page=0, max_pages=10, oldest_date='2010-11', prgrs=None):
         ''' Load posts in self.posts
             page: Initial page to start with
             max_pages: Maximum number of pages to read
@@ -40,8 +44,9 @@ class Feed:
             p = Post(item)
             if p.date == oldest_date:
                 return
-            self.posts.append(p) 
-        self.load(page+1,max_pages=max_pages, oldest_date=oldest_date)
+            self.posts.append(p)
+        prgrs.show(message='Loading pages progress:') 
+        self.load(page+1,max_pages=max_pages, oldest_date=oldest_date, prgrs=prgrs)
     
     def get_posts(self):
         ''' Get list of posts

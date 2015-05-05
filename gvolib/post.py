@@ -1,3 +1,5 @@
+# Author: Tarek Amr <@gr33ndata> 
+
 class Post:
 
     def __init__(self, feed_item):
