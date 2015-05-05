@@ -1,12 +1,17 @@
 import feedparser
 
+from gvolib import feed_links
 from gvolib.post import Post 
 
 class Feed:
 
     def __init__(self, url=''):
+        ''' Initialize Feed
+            url can be name like 'en', 'es', etc.
+            or real url 
+        '''
         self.posts = []
-        self.url = url
+        self.url = feed_links.get(url, url)
 
     def __len__(self):
         'Returns number of loaded posts'
@@ -39,5 +44,8 @@ class Feed:
         self.load(page+1,max_pages=max_pages, oldest_date=oldest_date)
     
     def get_posts(self):
+        ''' Get list of posts
+            You better user __iter__ though
+        '''
         return self.posts
 

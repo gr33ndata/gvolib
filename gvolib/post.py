@@ -16,6 +16,9 @@ class Post:
         )
 
     def encoder(self, field):
+        ''' UTF-8 encoding shit
+            Let's encode when writing to file or screen
+        '''
         if isinstance(field, list):
             return ', '.join([
                 item.encode('utf-8')
