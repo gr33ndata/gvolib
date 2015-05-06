@@ -12,7 +12,7 @@ There are two main components of this project:
 Installation
 -------------
 
-You sure need to have Python installed on your computer.
+You sure need to have `Python <https://www.python.org/>`_ installed on your computer.
 
 `Pandas <http://pandas.pydata.org/>`_ is needed for the CLI tool but not for the library itself; at least for now.
 
