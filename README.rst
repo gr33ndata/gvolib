@@ -1,7 +1,7 @@
 Global Voices Online Library 
 =============================
 
-`Global Voices Online <http://globalvoicesonline.org/>`_ is mainly a volunteer community of more than 1200 writers, analysts, online media experts and translators who try to report what is going in on citizen media since 2005. The website is built using WordPress, and this tool tried to extract meaningful data from the different RSS feeds it provides for academics and other hackers to use in their researches and analysis. 
+`Global Voices Online <http://globalvoicesonline.org/>`_ is mainly a volunteer community of more than 1200 writers, analysts, online media experts and translators who try to report what is going in on citizen media since 2005. The website is built using WordPress, and this tool tries to extract meaningful data from the different RSS feeds it provides for academics and other hackers to use in their research and analysis. 
 
 There are two main components of this project:
 
