@@ -8,4 +8,4 @@ class Authors(Dist):
         return self._distribution(attr='author')
 
     def time_distribution(self):
-        return self._time_distribution(attr='author')
+        return self._2d_distribution(attr1='date', attr2='author')

@@ -60,12 +60,16 @@ def main(args):
 
     #print Authors(f).distribution()
     auth_dist = Authors(f).time_distribution()
-    dump_distribution(auth_dist, filename='auth_dist.csv', index_label='author')
+    dump_distribution(auth_dist, filename='auth_date_dist.csv', index_label='author')
     
     #print Tags(f).distribution()
     tags_dist = Tags(f).time_distribution()
-    dump_distribution(tags_dist, filename='tags_dist.csv', index_label='tag')
+    dump_distribution(tags_dist, filename='tags_date_dist.csv', index_label='tag')
 
+    #print Authors(f).distribution()
+    tags_dist = Tags(f).author_distribution()
+    dump_distribution(tags_dist, filename='tags_auth_dist.csv', index_label='author')
+    
 
 if __name__ == '__main__':
 

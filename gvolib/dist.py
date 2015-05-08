@@ -27,13 +27,16 @@ class Dist:
                 authmap[attr_item] = authmap.get(attr_item, 0) + 1
         return authmap
 
-    def _time_distribution(self, attr='author', attr_processor=None):
+    def _2d_distribution(self, attr1='date', attr2='author', attr_processor=None):
         if not attr_processor:
             attr_processor = self._to_attr_items
         authmap = {}
         for post in self.feed:
-            authmap[post.date] = authmap.get(post.date, {})
-            attr_items = attr_processor(post, attr)
+            authmap[getattr(post, attr1)] = authmap.get(getattr(post, attr1), {})
+            attr_items = attr_processor(post, attr2)
             for attr_item in attr_items:
-                authmap[post.date][attr_item] = authmap[post.date].get(attr_item, 0) + 1
+                authmap[getattr(post, attr1)][attr_item] = authmap[getattr(post, attr1)].get(attr_item, 0) + 1
         return authmap
+
+    def _time_distribution(self, attr='author', attr_processor=None):
+        return self._2d_distribution(attr1='date', attr2=attr, attr_processor=None)
