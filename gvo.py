@@ -58,17 +58,6 @@ def main(args):
     f.load(max_pages=max_pages,prgrs=prgrs)
     print_debug('Loaded posts: {0}'.format(len(f)), silent=silent)
 
-    authors = Authors(f)
-    for a in authors:
-        print a 
-    print authors['Gabriela Garcia Calderon Orbe']
-
-    tags = Tags(f)
-    for t in tags:
-        print t 
-    print tags['Weblog']
-    return
-
     #print Authors(f).distribution()
     auth_dist = Authors(f).time_distribution()
     dump_distribution(auth_dist, filename='auth_date_dist.csv', index_label='author')
