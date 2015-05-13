@@ -58,6 +58,14 @@ def main(args):
     f.load(max_pages=max_pages,prgrs=prgrs)
     print_debug('Loaded posts: {0}'.format(len(f)), silent=silent)
 
+    for p in f:
+        print 'Post: {0}'.format(p.link)
+        print 'tweeps:'
+        print set(p.twitter_users)
+        print 'hashtags:'
+        print set(p.twitter_hashtags)
+    return
+
     #print Authors(f).distribution()
     auth_dist = Authors(f).time_distribution()
     dump_distribution(auth_dist, filename='auth_date_dist.csv', index_label='author')

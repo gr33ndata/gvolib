@@ -1,9 +1,11 @@
 # Author: Tarek Amr <@gr33ndata> 
+from gvolib.links import Links
 
 class Post:
 
     def __init__(self, feed_item):
         self.data = feed_item
+        self.links_object = Links(self.data) 
 
     def __str__(self):
         return '\nTitle: {title}' \
@@ -42,6 +44,7 @@ class Post:
     def author(self):
         return self.data.author
 
+    # This is link of the post itself
     @property
     def link(self):
         return self.data.link
@@ -59,3 +62,17 @@ class Post:
             self.data.published_parsed[0], 
             self.data.published_parsed[1]
         )
+
+    # These are links mentioned in post content
+    @property
+    def links(self):       
+        return [link for link in self.links_object]
+
+    @property
+    def twitter_users(self):
+        return self.links_object.twitter_users()
+
+    @property
+    def twitter_hashtags(self):
+        return self.links_object.twitter_hashtags()
+    
