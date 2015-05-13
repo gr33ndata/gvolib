@@ -15,7 +15,7 @@ class Authors(Dist):
         return len(self.data.keys)
 
     def __getitem__(self, author_name):
-        return self.data[author_name]
+        return self.data.get(author_name, [])
 
     def __iter__(self):
         for a, posts in self.data.items():

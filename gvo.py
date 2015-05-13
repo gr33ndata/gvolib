@@ -62,6 +62,11 @@ def main(args):
     for a in authors:
         print a 
     print authors['Gabriela Garcia Calderon Orbe']
+
+    tags = Tags(f)
+    for t in tags:
+        print t 
+    print tags['Weblog']
     return
 
     #print Authors(f).distribution()
