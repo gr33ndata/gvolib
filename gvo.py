@@ -64,7 +64,7 @@ def main(args):
         print set(p.twitter_users)
         print 'hashtags:'
         print set(p.twitter_hashtags)
-    return
+    #return
 
     #print Authors(f).distribution()
     auth_dist = Authors(f).time_distribution()

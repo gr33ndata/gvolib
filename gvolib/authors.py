@@ -4,6 +4,9 @@ from gvolib.dist import Dist
 
 class Authors(Dist):
 
+    def __init__(self, feed):
+        Dist.__init__(self,  feed) 
+
     def distribution(self):
         return self._distribution(attr='author')
 
